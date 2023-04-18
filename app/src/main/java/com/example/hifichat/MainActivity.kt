@@ -3,6 +3,8 @@ package com.example.hifichat
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -25,6 +27,8 @@ import com.google.firebase.ktx.Firebase
 
 lateinit var edit:EditText
 lateinit var txt: TextView
+val delay=1000
+lateinit var handler:Handler
 lateinit var txt5:TextView
 lateinit var database: DatabaseReference
 lateinit var but:Button
@@ -48,6 +52,17 @@ txt5.text="user : $user "
               edit.setText("")
             }
 
+
+        }
+
+
+    }
+
+    override fun onResume(){
+
+        var rec=sp2.getString("rec","").toString()
+        database = FirebaseDatabase.getInstance().getReference("chat")
+        Handler(Looper.getMainLooper()).postDelayed({
             database.addValueEventListener(object: ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -59,8 +74,9 @@ txt5.text="user : $user "
                     TODO("Not yet implemented")
                 }
 
-                  })
-        }
+            })
+        },1)
+        super.onResume()
 
-
-    }}
+    }
+}
