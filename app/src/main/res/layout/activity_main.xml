@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#1E1E1E"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#E3E0E0"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/but"
+      android:padding="10dp"
+        android:text="@string/hifi_chatting"
+        android:textSize="20sp"
+        android:id="@+id/t1"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/t3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_above="@id/t2"
+
+
+        android:layout_centerVertical="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/but3"
+
+        android:padding="15dp"
+
+        android:gravity="bottom"
+
+        android:textColor="@color/white"
+        android:textColorHint="#BCAAA4"
+        android:textSize="17sp"
+    />
+
+    <TextView
+        android:id="@+id/t2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+  android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="20dp"
+        android:background="#424040"
+        android:minHeight="180dp"
+        android:padding="10dp"
+
+        android:gravity="bottom"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarThumbVertical="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="#BCAAA4"
+        android:textSize="17sp"
+        android:verticalScrollbarPosition="right" />
+
+
+<LinearLayout
+    android:id="@+id/l1"
+ android:layout_below="@id/t2"
+    android:layout_width="match_parent"
+    android:minHeight="50dp"
+    android:weightSum="6"
+    android:layout_margin="12dp"
+    android:background="#424040"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/e1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4.5"
+        android:background="#424040"
+
+        android:hint="@string/write_your_message_here"
+        android:padding="5dp"
+        android:textColor="@color/white"
+
+        android:textColorHint="#BCAAA4"
+        android:textSize="17sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/b1"
+        android:gravity="center"
+        android:layout_weight="1.5"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/but2"
+        android:text="@string/send"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+</LinearLayout>
+</RelativeLayout>
