@@ -26,8 +26,11 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
 lateinit var edit:EditText
-lateinit var txt: TextView
+lateinit var txt: EditText
 val delay=1000
+var s=""
+
+var kk=""
 lateinit var handler:Handler
 lateinit var txt5:TextView
 lateinit var database: DatabaseReference
@@ -39,35 +42,52 @@ setContentView(R.layout.activity_main)
 
         var user=sp2.getString("user","").toString()
         var rec=sp2.getString("rec","").toString()
-
+var tt=0
         edit=findViewById(R.id.e1)
         but=findViewById(R.id.b1)
         txt=findViewById(R.id.t2)
         txt5=findViewById(R.id.t3)
 txt5.text="user : $user "
         but.setOnClickListener{
+
+        tt=0
             database = FirebaseDatabase.getInstance().getReference("chat")
             if(edit.text.toString()!="") {
-                database.child(user).setValue(edit.text.toString())
-              edit.setText("")
-            }
+
+                if(tt==0) {
+
+                    database.child(user).setValue(edit.text.toString())
+
+                    txt.append("\n\n$user : ${edit.text.toString()}")
+                    tt = 1
+                    database.child(user).setValue("")
+                }
 
 
+edit.setText("")
         }
 
 
-    }
+    }}
 
     override fun onResume(){
 
         var rec=sp2.getString("rec","").toString()
+        var user=sp2.getString("user","").toString()
         database = FirebaseDatabase.getInstance().getReference("chat")
         Handler(Looper.getMainLooper()).postDelayed({
             database.addValueEventListener(object: ValueEventListener {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val p = snapshot.child(rec).getValue()
-                    txt.text = p.toString()
+                    val oo=snapshot.child(user).getValue()
+                        if(p!="") {
+                            s = "\n\n$rec : ${p.toString()}"
+                            txt.append(s)
+                            s = ""
+                            database.child(rec).setValue("")
+
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {

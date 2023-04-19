@@ -25,7 +25,7 @@
         android:id="@+id/t3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-android:layout_above="@id/t2"
+android:layout_below="@id/t1"
 
 
         android:layout_centerVertical="true"
@@ -44,20 +44,23 @@ android:layout_above="@id/t2"
         android:textSize="17sp"
     />
 
-    <TextView
+    <EditText
         android:id="@+id/t2"
+        android:editable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+android:layout_below="@id/t3"
   android:layout_centerVertical="true"
         android:layout_marginStart="12dp"
+        android:hint="chat..."
         android:layout_marginTop="15dp"
+
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="20dp"
         android:background="#424040"
         android:minHeight="180dp"
         android:padding="10dp"
-
+android:layout_above="@id/l1"
         android:gravity="bottom"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbarThumbVertical="@color/black"
@@ -69,9 +72,10 @@ android:layout_above="@id/t2"
 
 <LinearLayout
     android:id="@+id/l1"
- android:layout_below="@id/t2"
+
     android:layout_width="match_parent"
     android:minHeight="50dp"
+    android:layout_alignParentBottom="true"
     android:weightSum="6"
     android:layout_margin="12dp"
     android:background="#424040"

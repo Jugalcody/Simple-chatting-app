@@ -26,7 +26,8 @@ but4=findViewById(R.id.user_but)
         but4.setOnClickListener{
 
             ref2= FirebaseDatabase.getInstance().getReference("chat")
-            if(edit3.text.toString()!="" && edit4.text.toString()!="") {
+            if(edit3.text.toString()!="") {
+                if( edit4.text.toString()!=""){
                 ref2.child(edit3.text.toString()).setValue("")
 
                 val i= Intent(this@first,MainActivity::class.java)
@@ -37,6 +38,14 @@ but4=findViewById(R.id.user_but)
                 sp2.edit().apply{putString("rec",edit4.text.toString())}.apply()
                 Toast.makeText(this@first,"hello ${edit3.text}",Toast.LENGTH_LONG).show()
                 startActivity(i)
+            }
+                else{
+                    Toast.makeText(this@first,"empty receiver name!",Toast.LENGTH_LONG).show()
+                }
+
+            }
+            else{
+                Toast.makeText(this@first,"empty username!",Toast.LENGTH_LONG).show()
             }
         }
     }
