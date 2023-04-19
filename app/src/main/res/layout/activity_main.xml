@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#1E1E1E"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity"
@@ -43,7 +44,7 @@ android:layout_below="@id/t1"
         android:textColorHint="#BCAAA4"
         android:textSize="17sp"
     />
-
+<!--
     <EditText
         android:id="@+id/t2"
         android:editable="false"
@@ -68,9 +69,34 @@ android:layout_above="@id/l1"
         android:textColorHint="#BCAAA4"
         android:textSize="17sp"
         android:verticalScrollbarPosition="right" />
+-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content"
+        android:minHeight="0dp"
+        android:layout_above="@id/l1"
 
+        android:layout_below="@id/t3">
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:minHeight="0dp"
 
-<LinearLayout
+    android:layout_height="wrap_content"
+
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="15dp"
+android:id="@+id/recycler"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="20dp"
+    android:background="#424040"
+    android:padding="10dp"
+
+    android:gravity="bottom"
+    android:textColor="@color/white"
+/>
+    </ScrollView>
+    <LinearLayout
     android:id="@+id/l1"
 
     android:layout_width="match_parent"
