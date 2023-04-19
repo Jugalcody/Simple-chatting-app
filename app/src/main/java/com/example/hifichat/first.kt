@@ -26,10 +26,13 @@ but4=findViewById(R.id.user_but)
         but4.setOnClickListener{
 
             ref2= FirebaseDatabase.getInstance().getReference("chat")
-            if(edit3.text.toString()!="") {
-                if( edit4.text.toString()!=""){
-                ref2.child(edit3.text.toString()).setValue("")
 
+            if(edit3.text.toString()!="") {
+
+                if( edit4.text.toString()!=""){
+
+              /*  ref2.child(edit3.text.toString()).setValue("")
+                    ref2.child(edit4.text.toString()).setValue("")*/
                 val i= Intent(this@first,MainActivity::class.java)
 
                 sp2=getSharedPreferences("data", Context.MODE_PRIVATE)
@@ -48,6 +51,16 @@ but4=findViewById(R.id.user_but)
                 Toast.makeText(this@first,"empty username!",Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    override fun onRestart() {
+        ref2= FirebaseDatabase.getInstance().getReference("chat")
+        val user = sp2.getString("user", "").toString()
+        val rec = sp2.getString("rec", "").toString()
+
+       ref2.child(user).setValue("")
+     ref2.child(rec).setValue("")
+        super.onRestart()
     }
 
 }

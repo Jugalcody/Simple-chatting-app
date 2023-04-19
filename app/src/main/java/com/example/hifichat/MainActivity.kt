@@ -33,7 +33,7 @@ import com.google.firebase.ktx.Firebase
 lateinit var edit:EditText
 lateinit var txt: EditText
 val delay=1000
-var s=""
+var s=false
 lateinit var recycler:RecyclerView
 lateinit var adapter2: adapter
 var kk=""
@@ -99,19 +99,7 @@ class MainActivity : ComponentActivity() {
         database = FirebaseDatabase.getInstance().getReference("chat")
 
 
-       displayMessages()
-
-
-    }
-
-    fun displayMessages() {
-        var rec = sp2.getString("rec", "").toString()
-        val msgh = object : Handler(Looper.getMainLooper()) {
-            override fun handleMessage(msg: Message) {
-                super.handleMessage(msg)
-            }
-        }
-        msgh.postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
 
             if (!messageDisplayed) {
                 database.addValueEventListener(object : ValueEventListener {
@@ -119,22 +107,18 @@ class MainActivity : ComponentActivity() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val p = snapshot.child(rec).getValue()
 
-                        if (p != "") {
-                            //s = "\n\n$rec : ${p.toString()}"
-                            // txt.gravity= Gravity.START
-                            //txt.append(s)
-
+                        if (p!="") s=false
+                        if(!s){
                             list.add(MessageList("", p.toString()))
                             // list.add(MessageList("ooo bhaiii",""))
 
                             adapter2 = adapter(this@MainActivity, list)
-                            println("jjjj : " + p)
+
                             recycler.adapter = adapter2
                             recycler.layoutManager = LinearLayoutManager(this@MainActivity)
-
-
+                           s=true
                             //s = ""
-                            database.child(rec).setValue("")
+                           database.child(rec).setValue("")
 
                         }
                     }
@@ -150,18 +134,24 @@ class MainActivity : ComponentActivity() {
         }, 1)
     }
 
-    override fun onRestart() {
-        list.clear()
-        database = FirebaseDatabase.getInstance().getReference("chat")
-        database.setValue("")
-        super.onRestart()
-    }
 
     override fun onBackPressed() {
+        val user = sp2.getString("user", "").toString()
+        val rec = sp2.getString("rec", "").toString()
         list.clear()
         database = FirebaseDatabase.getInstance().getReference("chat")
-        database.removeValue()
-
+        database.child(user).setValue("")
+        database.child(rec).setValue("")
         super.onBackPressed()
+    }
+
+    override fun onDestroy() {
+        val user = sp2.getString("user", "").toString()
+        val rec = sp2.getString("rec", "").toString()
+        list.clear()
+        database = FirebaseDatabase.getInstance().getReference("chat")
+        database.child(user).setValue("")
+        database.child(rec).setValue("")
+        super.onDestroy()
     }
 }
